@@ -1,179 +1,140 @@
-# IoT Sensor Temperature Analysis with IBM Db2 Event Store
+# IoT sensor temperature analysis and prediction with IBM Db2 Event Store
 
-IBM® Db2 Event Store is an in-memory database designed for massive structured data volumes and real-time analytics built on Apache SPARK and Apache Parquet Data Format. The solution is optimized for event-driven data processing and analysis. It can support emerging applications that are driven by events such as IoT solutions, payments, logistics and web commerce. It is flexible, scalable and can adapt quickly to your changing business needs over time. Available in a free developer edition and an enterprise edition that you can download now. The enterprise edition is free for pre-production and test, please visit the [official product webpage](https://www.ibm.com/products/db2-event-store) for more information.
+This code pattern demonstrates the use of a Jupyter notebooks to interact with IBM Db2 Event Store -- from the creation of database objects to advanced analytics and machine learning model development and deployment.
 
-The sample data used in this code pattern simulates the common data pattern collected by the real industry IoT sensors. The IoT data sample consists of record timestamp, ambient temperature, power consumption, and sensor temperature record by a group of sensors identified with unique sensor IDs and device IDs.
+The sample data used in this code pattern simulates data collected by real industry IoT sensors. The IoT sample data includes sensor temperature, ambient temperature, power consumption, and timestamp for a group of sensors identified with unique sensor IDs and device IDs.
 
-This code pattern contains two parts. The first part demonstrates a simple data load process and the use of a Jupyter notebook to interact with IBM Db2 Event Store, from the creation of the database objects to doing advanced analytics and machine learning model development and deployment. The second part demonstrates advanced usages, including ingesting data using IBM Streams, and running external applications in multiple programming languages and applications.
+Db2 Event Store is an in-memory database designed for massive structured data volumes and real-time analytics built on Apache Spark and Apache Parquet Data Format. The solution is optimized for event-driven data processing and analysis. It can support emerging applications that are driven by events such as IoT solutions, payments, logistics and web commerce. It is flexible, scalable and can adapt quickly to your changing business needs over time. Db2 Event Store is available in a free developer edition and an enterprise edition that you can download now. The enterprise edition is free for pre-production and test, please visit the [official product webpage](https://www.ibm.com/products/db2-event-store) for more information.
 
-When the reader has completed this code pattern, they will understand how to:
+> Note: Db2 Event Store is built with IBM Watson Studio
 
-* Install IBM Db2 Event Store developer edition
-* Ingest data into IBM Db2 Event Store
+After completing this code pattern, you’ll understand how to:
+
 * Interact with Db2 Event Store using Python and a Jupyter notebook
-* Perform online scoring using saved machine learning model through curl
-* Interact with IBM Db2 Event Store through its REST API
-* Run IBM Streams and Remote Access Applications with IBM Db2 Event Store
+* Visualize data using Matplotlib charts
+* Build and test a machine learning model
+* Deploy and use the model with Watson Machine Learning
 
-**Table of Contents**
+![architecture](doc/source/images/architecture.png)
 
-- [IoT Sensor Temperature Analysis with IBM Db2 Event Store](#iot-sensor-temperature-analysis-with-ibm-db2-event-store)
-  * [Abstract](#abstract)
-  * [Included components](#included-components)
-  * [Featured technologies](#featured-technologies)
-  * [Prerequisites](#prerequisites)
-- [Workflow](#workflow)
-    + [1 . Prepare sample IoT dataset](#1-prepare-the-sample-iot-dataset)
-    + [2. Interact with IBM Db2 Event Store using Jupyter notebook](#2-interact-with-ibm-db2-event-store-using-jupyter-notebook)
-    + [3. Interact with Event Store database using REST API](#3-interact-with-event-store-database-using-rest-api)
-    + [4. Run Example IBM Streams and Remote Access Applications with Event Store](#4-run-example-ibm-streams-and-remote-access-applications-with-event-store)
-- [Sample output](#sample-output)
-- [Links](#links)
-- [Learn more](#learn-more)
-- [License](#license)
+## Flow
 
-## Abstract
+1. Create the Db2 Event Store table and feed in the data
+1. Query the data
+1. Analyze the data with Matplotlib charts
+1. Train a temperature prediction model
+1. Deploy the model with Watson Machine Learning
 
-1. Install IBM Db2 Event Store
+## Steps
+
+1. [Clone the repo](#1-clone-the-repo)
+2. [Install IBM Db2 Event Store](#2-install-ibm-db2-event-store)
+3. [Add the sample IoT data asset](#3-add-the-sample-iot-data-asset)
+4. [Create an IBM Db2 Event Store database and table](#4-create-an-ibm-db2-event-store-database-and-table)
+5. [Query the table](#5-query-the-table)
+6. [Analyze the data](#6-analyze-the-data)
+7. [Create and deploy a machine learning model](#7-create-and-deploy-a-machine-learning-model)
+
+<!--
+1. [Visualize the data](#6-visualize-the-data)
+2. [Create Watson services with IBM Cloud](#2-create-watson-services-with-ibm-cloud)
 2. Setup a Event Store database and table
 3. Perform multiple data science tasks with Event Store using Jupyter notebooks
 4. Interact with Event Store database using REST API
 5. Run example IBM Streams and Remote Access Applications with Event Store
+-->
 
-## Included components
+### 1. Clone the repo
 
-* [IBM Db2 Event Store](https://www.ibm.com/us-en/marketplace/db2-event-store): In-memory database optimized for event-driven data processing and analysis.
-* [IBM Watson Studio Local](https://www.ibm.com/cloud/watson-studio): Analyze data using RStudio, Jupyter, and Python in a configured, collaborative environment that includes IBM value-adds, such as managed Spark.
-* [Jupyter Notebook](http://jupyter.org/): An open source web application that allows you to create and share documents that contain live code, equations, visualizations, and explanatory text.
-* [Python](https://www.python.org/): Python is a programming language that lets you work more quickly and integrate your systems more effectively.
-* [Java](https://java.com/): A secure, object-oriented programming language for creating applications.
-* [Scala](https://www.scala-lang.org/): Scala combines object-oriented and functional programming in one concise, high-level language.
-
-## Featured technologies
-* [Databases](https://en.wikipedia.org/wiki/IBM_Information_Management_System#.22Full_Function.22_databases): Repository for storing and managing collections of data.
-* [Analytics](https://developer.ibm.com/watson/): Analytics delivers the value of data for the enterprise.
-* [Data Science](https://medium.com/ibm-data-science-experience/): Systems and scientific methods to analyze structured and unstructured data in order to extract knowledge and insights.
-
-## Prerequisites
-
-- Install IBM Db2 Event Store Developer Edition or Enterprise Edition
-
-  The IBM Db2 Event Store Enterprise Edition is suggested to be installed in order to execute the examples in this repository. The Enterprise Edition is free for pre-production and test, you are welcomed to visit [official product webpage](https://www.ibm.com/products/db2-event-store) to get the Enterprise Edition for trial.
-
-  * Alternatively you can install the free developer edition on Mac, Linux, or Windows by following the instructions [here. ](https://www.ibm.com/support/knowledgecenter/en/SSGNPV/eventstore/desktop/install.html) However, the function of the developer edition is limited, some tasks cannot be performed with the developer edition.*
-
-  > Note: This code pattern was developed with EventStore-Enterprise Edition 1.1.3
-
-* Clone this github repository to get a local copy of all files
-
-Clone the `db2eventstore-IoT-Analytics` locally. In a terminal, run:
+Clone the `db2-event-store-iot-analytics` repo locally. In a terminal, run:
 
 ```bash
-git clone https://github.com/IBMProjectEventStore/db2eventstore-IoT-Analytics
+git clone https://github.com/IBM/db2-event-store-iot-analytics
 ```
 
-# Workflow
+### 2. Install IBM Db2 Event Store
 
-### 1. Prepare the sample IoT dataset
+You can use the Developer Edition or Enterprise Edition of IBM Db2 Event Store.
 
-This repository includes a generator to create a  sample IoT dataset in CSV format that contains 1 Million records. The sample CSV dataset can be found at `/data/sample_IOT_table.csv`.
+* To install Db2 Event Store Developer Edition on Mac, Linux, or Windows follow the instructions [here](https://www.ibm.com/support/knowledgecenter/en/SSGNPV_1.1.3/desktop/install.html).
 
-Alternatively, a CSV dataset containing user-specified number of record can be generated with the provided python script at `/data/generator.py`. A Python environment with Pandas and Numpy installed is required to run the script.
+* The Enterprise Edition is free for pre-production and test. You are welcome to visit the [official product webpage](https://www.ibm.com/products/db2-event-store) to get the Enterprise Edition for trial.
+
+### 3. Add the sample IoT data asset
+
+This repository includes a generated sample IoT dataset in CSV format that contains 1 million records. The sample CSV dataset can be found at `data/sample_IOT_table.csv`.
+
+Alternatively, a CSV dataset containing a user-specified number of records can be generated with the provided Python script at `data/generator.py`. A Python environment with pandas and NumPy installed is required to run the script.
 
 ```bash
-cd data
+cd db2-event-store-iot-analysis/data
 python ./generator.py -c <Record Count>
 ```
 
-### 2. Interact with IBM Db2 Event Store using Jupyter notebook
+Use the Db2 Event Store UI to add the CSV input file as a data asset.
 
-![Architecture](doc/source/images/architecture.png)
+1. From the upper-left corner `☰` drop down menu, select `My Notebooks`.
 
-#### a. Load the notebooks in IBM Watson Studio Local
+   ![go_to_my_notebooks](doc/source/images/go_to_my_notebooks.png)
 
-> Note: Db2 Event Store is built with IBM Watson Studio Local
+1. Scroll down and click on `add data assets`.
 
-The git repo includes four Jupyter Notebooks which demonstrate interacting with
-Db2 Event Store with Spark SQL and multiple popular data science tools.
+   ![add_to_my_notebooks](doc/source/images/add_to_my_notebooks.png)
 
-**Importing the Notebook**
+1. Click `browse` and navigate to the `data` directory in your cloned repo. Open the file `sample_IOT_table.csv`.
 
-Use the Db2 Event Store / IBM Watson Studio Local UI to create and run the notebook.
+   ![data_assets](doc/source/images/data_assets.png)
 
-1. From the drop down menu (three horizontal lines in the upper left corner), select `My Notebooks`.
-2. Click on `add notebooks`.
-3. Select the `From File` tab.
-4. Provide a name.
-5. Click `Choose File` and navigate to the `notebooks` directory in your cloned repo. Select the Jupyter notebook files with name pattern `*.ipynb`.
-6. Scroll down and click on `Create Notebook`.
-  The new notebook is now open and ready for execution.
+### 4. Create an IBM Db2 Event Store database and table
 
-#### b. Create IBM Db2 Event Store database and table with Jupyter notebook
+The Db2 Event Store database and table can be created with one of the Jupyter notebooks provided. Refer to the notebook comments if you need to drop your existing database or table.
 
-Db2 Event Store database and table can be created with one of the Jupyter notebooks provided once it is loaded to the IBM Watson Studio Local. The notebook will drop existing database and create a new database containing a table.
+The notebook also loads the table with one million records from the CSV file that you added as a project asset.
 
-1. Open the Jupyter notebook with name `Event_Store_Table_Creation.ipynb` from Db2 Event Store / IBM Watson Studio Local UI.
-2. Edit the `HOST` constant in the first code cell. You will need to enter your host's IP address here.
-3. Run the notebook using the menu `Cell > Run all` or run the cells individually with the play button.
+Use the Db2 Event Store UI to create and run the notebook as follows:
 
-#### c. Ingest sample data with the Java Event Store CSV loader
+1. From the upper-left corner `☰` drop down menu, select `My Notebooks`.
+1. Click on `add notebooks`.
+1. Select the `From File` tab.
+1. Provide a name.
+1. Click `Choose File` and navigate to the `notebooks` directory in your cloned repo. Open the Jupyter notebook file named **`Event_Store_Table_Creation.ipynb`**.
+1. Scroll down and click on `Create Notebook`.
+1. Edit the `HOST` constant in the first code cell. You will need to enter your host's IP address here.
+1. Run the notebook using the menu `Cell  ▷ Run all` or run the cells individually with the play button.
 
-Sample IoT dataset can be ingested to the IBM Db2 Event Store database at lighting speed with Event Store CSV loader. This git repo provides a script that will download the Java CSV loader and ingest the sample CSV dataset into the Event Store database. To run this task, Java 8 must be installed.
+### 5. Query the table
 
-```bash
-# replace content in < > accordingly
+Follow the same process to add and run the notebook. This time choose the file named **`Event_Store_Querying_on_Table.ipynb`**.
 
-./load.sh --user <user_name> --connstring <host IP>:1101 --filename ./sample_IOT_table.csv --dbname TESTDB --tablename IOT_TEMP --numrowsperbatch 100000
-```
+This notebook demonstrates best practices for querying the data stored in the IBM Db2 Event Store database. Verify that you have successfully created and loaded the table before continuing.
 
-When prompted, enter your IBM Db2 Event Store password.
+### 6. Analyze the data
 
-#### d. Run the data analytics notebooks
+Next, run the data analytics notebook. Use the file **`Event_Store_Data_Analytics.ipynb`**.
 
-Run the notebooks below to learn how the IBM Db2 Event Store can be integrated with multiple popular scientific tools to perform various data  analytics tasks.
+This notebook shows how the IBM Db2 Event Store can be integrated with multiple popular scientific tools to perform various data analytics tasks.
 
-**`Event_Store_Querying_on_Table.ipynb`**  
-This notebook demonstrates best practices for querying the data stored in the IBM Db2 Event Store database. 
+### 7. Create and deploy a machine learning model
 
-**`Event_Store_Data_Analytics.ipynb`**  
-This notebook demonstrates performing data analytics on the data stored in the IBM Db2 Event Store database.
+This section demonstrates building and deploying a machine learning model. The notebook uses Spark MLlib to build and test a prediction model from our IoT temperature sensor data. At the end, it demonstrates how to deploy and use the model.
 
-**`Event_Store_ML_Model_Deployment.ipynb`**  
-This notebook demonstrates building and deploying a machine learning model on the data stored in the IBM Db2 Event Store database. It also shows how to perform online scoring from command line using curl.
+If you are using the **Enterprise Edition** of Db2 Event Store, the notebook will deploy the model using Db2 Event Store which is built with Watson Studio Local.
 
-**To run each notebook**
+If you are using the **Developer Edition** of Db2 Event Store, you need an IBM Cloud Watson Machine Learning service instance to complete the deployment. Follow these steps:
 
-1. Open the notebooks from IBM Watson Studio Local UI.
-2. Edit the `HOST` constant in the first code cell that is provided as input to the `ConfigurationReader.setConnectionEndpoints()` API. You will need to enter the connection string for your IBM Db2 Event Store deployment.
-3. Run the notebook using the menu `Cell > Run all` or run the cells individually with the play button.
+* Sign in and create the service [here](https://console.ng.bluemix.net/catalog/services/machine-learning).
+* Click on `Service credentials` and then `New credential` and `Add`.
+Use `View credentials` and copy the credentials JSON.
+* You will use the JSON to set the `wml_credentials` variable in the notebook.
 
-### 3. Interact with Event Store database using REST API
+Load the notebook, using the file **`Event_Store_Data_Analytics.ipynb`**.
 
-The instructions for running the REST API example can be found at: [Event Store REST API instruction](./rest/README.md)
-
-### 4. Run Example IBM Streams and Remote Access Applications with Event Store
-![Architecture](doc/source/images/advanced.png)
-
-The instructions for running the example IBM Streams application and the example remote access applications are here: [Instructions for using IBM Streams and remote access applications with IBM Db2 Event Store](AdvancedApplications/README.md)
-
-# Sample output
+## Sample output
 
 See the notebooks with example output here: [notebook examples with result](examples)
 
-# Links
-* [**Ingest and Analyze Streaming Event Data at Scale with IBM Db2 EventStore**](http://www.ibmbigdatahub.com/blog/ingest-and-analyze-streaming-event-data-scale-ibm-eventstore)
-* [**Fast Data Ingestion, ML Equates to Smarter Decisions Faster**](https://www.ibm.com/blogs/think/2018/03/db2-event-store/)
-* [**IBM Db2 Event Store Solution Brief**](https://www-01.ibm.com/common/ssi/cgi-bin/ssialias?htmlfid=09014509USEN&)
-* [**Overview of IBM Db2 Event Store Enterprise Edition**](https://www.ibm.com/support/knowledgecenter/en/SSGNPV/eventstore/local/overview.html#overview)
-* [**Developer Guide for IBM Db2 Event Store Client APIs**](https://www.ibm.com/support/knowledgecenter/en/SSGNPV/eventstore/desktop/dev-guide.html)
-* [**IBM Marketplace**](https://www.ibm.com/us-en/marketplace/db2-event-store)
+## License
 
-# Learn more
-* **IBM Watson Studio Local**: Master the art of data science with IBM's [IBM Watson Studio Local](https://www.ibm.com/cloud/watson-studio/)
+This code pattern is licensed under the Apache License, Version 2. Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1](https://developercertificate.org/) and the [Apache License, Version 2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
-# License
-[Apache 2.0](LICENSE)
-
-
-[@Frank Sun](https://twitter.com/sun_xi_frank), [IBM Db2 Event Store](https://www.ibm.com/products/db2-event-store)
-
+[Apache License FAQ](https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
