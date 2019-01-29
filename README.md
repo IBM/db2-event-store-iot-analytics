@@ -87,7 +87,7 @@ python ./generator.py -c <Record Count>
 
 ### 2. Interact with IBM Db2 Event Store using Jupyter notebook
 
-![Architecture](images/architecture.png)
+![Architecture](doc/source/images/architecture.png)
 
 #### a. Load the notebooks in IBM Watson Studio Local
 
@@ -152,13 +152,13 @@ This notebook demonstrates building and deploying a machine learning model on th
 The instructions for running the REST API example can be found at: [Event Store REST API instruction](./rest/README.md)
 
 ### 4. Run Example IBM Streams and Remote Access Applications with Event Store
-![Architecture](images/advanced.png)
+![Architecture](doc/source/images/advanced.png)
 
 The instructions for running the example IBM Streams application and the example remote access applications are here: [Instructions for using IBM Streams and remote access applications with IBM Db2 Event Store](AdvancedApplications/README.md)
 
 # Sample output
 
-See the notebooks with example output here: [notebook examples with result](notebooks_with_result)
+See the notebooks with example output here: [notebook examples with result](examples)
 
 # Links
 * [**Ingest and Analyze Streaming Event Data at Scale with IBM Db2 EventStore**](http://www.ibmbigdatahub.com/blog/ingest-and-analyze-streaming-event-data-scale-ibm-eventstore)
