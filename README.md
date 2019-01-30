@@ -19,11 +19,11 @@ After completing this code pattern, you’ll understand how to:
 
 ## Flow
 
-1. Create the Db2 Event Store table and feed in the data
-1. Query the data
-1. Analyze the data with Matplotlib charts
-1. Train a temperature prediction model
-1. Deploy the model with Watson Machine Learning
+1. Add the sample IoT dataset as a project asset
+2. Create the Db2 Event Store database and table
+3. Query the table using Spark SQL
+4. Analyze the data with Matplotlib charts
+5. Create and deploy a machine learning model
 
 ## Steps
 
