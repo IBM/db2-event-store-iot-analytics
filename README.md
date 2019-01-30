@@ -112,7 +112,15 @@ This notebook demonstrates best practices for querying the data stored in the IB
 
 Next, run the data analytics notebook. Use the file **`Event_Store_Data_Analytics.ipynb`**.
 
-This notebook shows how the IBM Db2 Event Store can be integrated with multiple popular scientific tools to perform various data analytics tasks.
+This notebook shows how the IBM Db2 Event Store can be integrated with multiple popular scientific tools to perform various data analytics tasks. As you walk through the notebook, you'll explore the data to filter it and example the correlation and covariance of the measurements. You'll also use some charts to visualize the data.
+
+#### Probability plots, box plots, and histograms for temperature data
+
+![plots](doc/source/images/plots.png)
+
+#### Scatter plots to show the relationship between measurements
+
+![scatters](doc/source/images/scatters.png)
 
 ### 7. Create and deploy a machine learning model
 
