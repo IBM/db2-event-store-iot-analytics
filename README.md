@@ -104,7 +104,7 @@ Use the Db2 Event Store UI to create and run the notebook as follows:
 
 ### 5. Query the table
 
-Follow the same process to add and run the notebook. This time choose the file named **`Event_Store_Querying_on_Table.ipynb`**.
+Follow the same process to add and run the notebook. This time choose the file named **`Event_Store_Querying.ipynb`**.
 
 This notebook demonstrates best practices for querying the data stored in the IBM Db2 Event Store database. Verify that you have successfully created and loaded the table before continuing.
 
