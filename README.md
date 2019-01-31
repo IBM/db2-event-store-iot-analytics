@@ -35,15 +35,6 @@ After completing this code pattern, you’ll understand how to:
 6. [Analyze the data](#6-analyze-the-data)
 7. [Create and deploy a machine learning model](#7-create-and-deploy-a-machine-learning-model)
 
-<!--
-1. [Visualize the data](#6-visualize-the-data)
-2. [Create Watson services with IBM Cloud](#2-create-watson-services-with-ibm-cloud)
-2. Setup a Event Store database and table
-3. Perform multiple data science tasks with Event Store using Jupyter notebooks
-4. Interact with Event Store database using REST API
-5. Run example IBM Streams and Remote Access Applications with Event Store
--->
-
 ### 1. Clone the repo
 
 Clone the `db2-event-store-iot-analytics` repo locally. In a terminal, run:
@@ -132,14 +123,29 @@ If you are using the **Developer Edition** of Db2 Event Store, you need an IBM C
 
 * Sign in and create the service [here](https://console.ng.bluemix.net/catalog/services/machine-learning).
 * Click on `Service credentials` and then `New credential` and `Add`.
-Use `View credentials` and copy the credentials JSON.
+* Use `View credentials` and copy the credentials JSON.
 * You will use the JSON to set the `wml_credentials` variable in the notebook.
+* The notebook will pip install watson-machine-learning-client. After the install, you usually need to restart your kernel and run the notebook again from the top.
 
 Load the notebook, using the file **`Event_Store_Data_Analytics.ipynb`**.
 
+Once the model is built and deployed, you can easily send it a new measurement and get a predicted temperature (one at a time or in batches).
+
+##### Given a new data point
+
+```python
+new_data = {"deviceID" : 2, "sensorID": 24, "ts": 1541430459386, "ambient_temp": 30, "power": 10}
+```
+
+##### The result includes a predicted temperature
+
+```python
+predictions:  [48.98055760884435]
+```
+
 ## Sample output
 
-See the notebooks with example output here: [notebook examples with result](examples)
+See all the notebooks with example output [here](examples).
 
 ## License
 
