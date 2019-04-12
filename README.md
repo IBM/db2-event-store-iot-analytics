@@ -45,11 +45,9 @@ git clone https://github.com/IBM/db2-event-store-iot-analytics
 
 ### 2. Install IBM Db2 Event Store
 
-You can use the Developer Edition or Enterprise Edition of IBM Db2 Event Store.
+Install IBM® Db2® Event Store Developer Edition on Mac, Linux, or Windows by following the instructions [here.](https://www.ibm.com/products/db2-event-store)
 
-* To install Db2 Event Store Developer Edition on Mac, Linux, or Windows follow the instructions [here](https://www.ibm.com/support/knowledgecenter/en/SSGNPV_1.1.3/desktop/install.html).
-
-* The Enterprise Edition is free for pre-production and test. You are welcome to visit the [official product webpage](https://www.ibm.com/products/db2-event-store) to get the Enterprise Edition for trial.
+> Note: This code pattern was developed with EventStore-DeveloperEdition 1.1.4
 
 ### 3. Add the sample IoT data asset
 
@@ -58,7 +56,7 @@ This repository includes a generated sample IoT dataset in CSV format that conta
 Alternatively, a CSV dataset containing a user-specified number of records can be generated with the provided Python script at `data/generator.py`. A Python environment with pandas and NumPy installed is required to run the script.
 
 ```bash
-cd db2-event-store-iot-analysis/data
+cd db2-event-store-iot-analytics/data
 python ./generator.py -c <Record Count>
 ```
 
@@ -121,13 +119,13 @@ If you are using the **Enterprise Edition** of Db2 Event Store, the notebook wil
 
 If you are using the **Developer Edition** of Db2 Event Store, you need an IBM Cloud Watson Machine Learning service instance to complete the deployment. Follow these steps:
 
-* Sign in and create the service [here](https://console.ng.bluemix.net/catalog/services/machine-learning).
+* Sign in and create the service [here](https://cloud.ibm.com/catalog/services/machine-learning).
 * Click on `Service credentials` and then `New credential` and `Add`.
 * Use `View credentials` and copy the credentials JSON.
 * You will use the JSON to set the `wml_credentials` variable in the notebook.
 * The notebook will pip install watson-machine-learning-client. After the install, you usually need to restart your kernel and run the notebook again from the top.
 
-Load the notebook, using the file **`Event_Store_Data_Analytics.ipynb`**.
+Load the notebook, using the file **`Event_Store_ML_Model_Deployment.ipynb`**.
 
 Once the model is built and deployed, you can easily send it a new measurement and get a predicted temperature (one at a time or in batches).
 
