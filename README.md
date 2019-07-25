@@ -126,7 +126,7 @@ Click to expand the data feed instructions for IBM Streams or for the Jupyter no
 
    - [ ] Using the `Project Explorer` tab, expand your new project, right-click on `Dependencies` and select `Edit Dependencies`. Remove `com.ibm.streamsx.eventstore` version 2.0.3. This is a newer version that does not work with our 1.1.4 Developer Edition of Event Store.
 
-   - [ ] Using the `Streams Explorer` tab, expand `IBM Streams Installations` and `IBM Streams` to show `Toolkit Locations`. your new project, right-click on `Dependencies` and select `Edit Dependencies`. Right-click and select `Add Toolkit Location...`. Use the `Directory...` button and add the `/home/streamsadmin/hostdir/toolkits` directory (where you extracted the the streamsx.eventstore_1.2.0-RELEASE.tgz toolkit).
+   - [ ] Using the `Streams Explorer` tab, expand `IBM Streams Installations` and `IBM Streams` to show `Toolkit Locations`. Right-click and select `Add Toolkit Location...`. Use the `Directory...` button and add the `/home/streamsadmin/hostdir/toolkits` directory (where you extracted the the streamsx.eventstore_1.2.0-RELEASE.tgz toolkit).
 
    - [ ] Back in the `Project Explorer` tab, right-click on `Dependencies` and select `Edit Dependencies`, `Add`, and `Browse`. Select `com.ibm.streamsx.eventstore 1.2.0` and hit `OK`. Now we are using the downloaded version that works with our 1.1.4 Developer Edition and ignoring the newer version.
 
@@ -144,7 +144,7 @@ Click to expand the data feed instructions for IBM Streams or for the Jupyter no
 
      ![file_source.png](doc/source/images/file_source.png)
 
-   - [ ] Double-click the FileSource box, select `Param` in the left sidebar, and edit the value to set it to "/users/streamsadmin/hostdir/sample_IOT_table.csv" (where you put the data file). Add a `format` parameter and set the value to `csv`.
+   - [ ] Double-click the FileSource box, select `Param` in the left sidebar, and edit the value to set it to `"/users/streamsadmin/hostdir/sample_IOT_table.csv"` (where you put the data file). Add a `format` parameter and set the value to `csv`.
 
      ![file_source_params.png](doc/source/images/file_source_params.png)
 
