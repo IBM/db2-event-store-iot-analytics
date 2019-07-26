@@ -1,30 +1,31 @@
-# IoT sensor temperature analysis and prediction with IBM Db2 Event Store
+# Analyze IoT sensor data with machine learning and advanced analytics
 
-This code pattern demonstrates the use of a Jupyter notebooks to interact with IBM Db2 Event Store -- from the creation of database objects to advanced analytics and machine learning model development and deployment.
+This code pattern demonstrates the use of Jupyter notebooks to interact with IBM Db2 Event Store -- from the creation of database objects to advanced analytics and machine learning model development and deployment.
 
 The sample data used in this code pattern simulates data collected by real industry IoT sensors. The IoT sample data includes sensor temperature, ambient temperature, power consumption, and timestamp for a group of sensors identified with unique sensor IDs and device IDs.
+A simple IBM Streams flow is used to stream the sample data from a CSV file to an Event Store table.
 
-Db2 Event Store is an in-memory database designed for massive structured data volumes and real-time analytics built on Apache Spark and Apache Parquet Data Format. The solution is optimized for event-driven data processing and analysis. It can support emerging applications that are driven by events such as IoT solutions, payments, logistics and web commerce. It is flexible, scalable and can adapt quickly to your changing business needs over time. Db2 Event Store is available in a free developer edition and an enterprise edition that you can download now. The enterprise edition is free for pre-production and test, please visit the [official product webpage](https://www.ibm.com/products/db2-event-store) for more information.
+Db2 Event Store is an in-memory database designed for massive structured data volumes and real-time analytics, built on Apache Spark and Apache Parquet Data Format. The solution is optimized for event-driven data processing and analysis. It can support emerging applications that are driven by events such as IoT solutions, payments, logistics and web commerce. It is flexible, scalable and can adapt quickly to your changing business needs over time. Db2 Event Store is available in a free developer edition and an enterprise edition that you can download now. The enterprise edition is free for pre-production and test, please visit the [official product webpage](https://www.ibm.com/products/db2-event-store) for more information.
 
 > Note: Db2 Event Store is built with IBM Watson Studio
 
 After completing this code pattern, you’ll understand how to:
 
-* Interact with Db2 Event Store using Python and a Jupyter notebook
-* Use IBM Streams to feed data into Db2 Event Store
-* Visualize data using Matplotlib charts
-* Build and test a machine learning model
-* Deploy and use the model with Watson Machine Learning
+* Interact with Db2 Event Store using Python and a Jupyter notebook.
+* Use IBM Streams to feed data into Db2 Event Store.
+* Visualize data using Matplotlib charts.
+* Build and test a machine learning model.
+* Deploy and use the model with Watson Machine Learning.
 
 ![architecture](doc/source/images/architecture.png)
 
 ## Flow
 
-1. Create the Db2 Event Store database and table
-2. Feed the sample IoT dataset into Db2 Event Store
-3. Query the table using Spark SQL
-4. Analyze the data with Matplotlib charts
-5. Create and deploy a machine learning model
+1. Create the Db2 Event Store database and table.
+2. Feed the sample IoT dataset into Db2 Event Store.
+3. Query the table using Spark SQL.
+4. Analyze the data with Matplotlib charts.
+5. Create and deploy a machine learning model.
 
 ## Steps
 
