@@ -14,7 +14,7 @@ Following are the services that you need to get installed and provisioned.
 * Db2 Event Store
 * Watson Machine Learning
 
-By default Jupyter notebooks are availabe part of Watson Studio. You need to make sure `Default Spark Pythyon 3.6 kernel` is available when creating notebooks. If not your administrator should help you install it.
+By default Jupyter notebooks are availabe part of Watson Studio. You need to make sure `Default Spark Python 3.6 kernel` is available when creating notebooks. If not, your administrator should help you install it.
 
 Once provisioned you can go to the navigation menu, select `My Instances`, click on `Provisioned instances` tab and make sure your instances are available in the list.
 
@@ -51,7 +51,7 @@ Login to your IBM cloud Pak for Data cluster. From the hamburger menu, click `Pr
 
 ### 3. Get Db2 Event Store Credentials
 
-Go to `My instances` from the hamburger menu and select `Provisioned instances`. Click on 3 dots on the far right of the `Db2 event store` instance and click `View details`. Copy the `Deployment id` from the `Db2 EventStore` section and Copy the `SCALA Connection URL` from the `Access Information` section at the bottom and save it for future purpose.
+Go to `My instances` from the hamburger menu and select `Provisioned instances`. Click on 3 dots on the far right of the `Db2 Event Store` instance and click `View details`. Copy the `Deployment id` from the `Db2 EventStore` section and Copy the `Scala Connection URL` from the `Access Information` section at the bottom and save it for future use.
 
 ![Create project](doc/source/images/db2-event-store-details-cpd.png)
 
@@ -59,7 +59,7 @@ Go to `My instances` from the hamburger menu and select `Provisioned instances`.
 
 The Db2 Event Store database and table can be created with one of the Jupyter notebooks provided. Refer to the notebook comments if you need to drop your existing database or table.
 
-1. From `Assets` tab in your Watson studio project, click `+ Add notebook`.
+1. From `Assets` tab in your Watson Studio project, click `+ Add notebook`.
 1. Select the `From File` tab.
 1. Provide a name.
 1. Click `Choose File` and navigate to the `notebooks-cpd` directory in your cloned repo. Open the Jupyter notebook file named **`Event_Store_Table_Creation.ipynb`**.
@@ -81,7 +81,7 @@ cd db2-event-store-iot-analytics/data
 python ./generator.py -c <Record Count>
 ```
 
-1. From `Assets` tab in your Watson studio project, click `Find and add data` icon on top right. and upload the generated file or the provided file `data/sample_iot_table.csv` from the cloned repository. 
+1. From `Assets` tab in your Watson Studio project, click `Find and add data` icon on top right. and upload the generated file or the provided file `data/sample_iot_table.csv` from the cloned repository. 
 1. Similar to step #4, Add the **`Event_Store_Data_Feed.ipynb`** notebook, modify the credentials and run the notebook.
 
 The notebook loads the table with one million records from the CSV file that you added as a project asset.
