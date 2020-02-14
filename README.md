@@ -27,6 +27,10 @@ After completing this code pattern, you’ll understand how to:
 4. Analyze the data with Matplotlib charts.
 5. Create and deploy a machine learning model.
 
+## Running Db2 EventStore in Cloud Pak for Data (CPD)
+
+Please follow [Cloud Pak Readme](README_CLOUDPAK.md) to run Db2 EventStore in CPD.
+
 ## Steps
 
 1. [Clone the repo](#1-clone-the-repo)
