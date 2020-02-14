@@ -14,7 +14,7 @@ Following are the services that you need to get installed and provisioned.
 * Db2 Event Store
 * Watson Machine Learning
 
-By default Jupyter notebooks are availabe part of Watson Studio. You need to make sure `Default Spark Python 3.6 kernel` is available when creating notebooks. If not, your administrator should help you install it.
+By default Jupyter notebooks are available part of Watson Studio. You need to make sure `Default Spark Python 3.6 kernel` is available when creating notebooks. If not, your administrator should help you install it.
 
 Once provisioned you can go to the navigation menu, select `My Instances`, click on `Provisioned instances` tab and make sure your instances are available in the list.
 
