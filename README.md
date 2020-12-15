@@ -29,7 +29,8 @@ After completing this code pattern, you’ll understand how to:
 
 ## Running Db2 EventStore in Cloud Pak for Data (CPD)
 
-Please follow [Cloud Pak Readme](README_CLOUDPAK.md) to run Db2 EventStore in CPD.
+If you have a Cloud Pak for Data instance deployed, please follow the [Cloud Pak Readme](README_CLOUDPAK.md) to run Db2 EventStore in CPD.
+Otherwise, continue with the following steps to deploy the components locally.
 
 ## Steps
 
@@ -230,17 +231,31 @@ This notebook shows how the IBM Db2 Event Store can be integrated with multiple 
 
 This section demonstrates building and deploying a machine learning model. The notebook uses Spark MLlib to build and test a prediction model from our IoT temperature sensor data. At the end, it demonstrates how to deploy and use the model.
 
-If you are using the **Enterprise Edition** of Db2 Event Store, the notebook will deploy the model using Db2 Event Store which is built with Watson Studio Local.
+Load the notebook, using the file **`Event_Store_ML_Model_Deployment.ipynb`**.
 
-If you are using the **Developer Edition** of Db2 Event Store, you need an IBM Cloud Watson Machine Learning service instance to complete the deployment. Follow these steps:
+If you are using the **Enterprise Edition** of Db2 Event Store, the notebook will deploy the model using Db2 Event Store which is built with Watson Studio Local. You can run the notebook as is.
+
+If you are using the **Developer Edition** of Db2 Event Store, you need an IBM Cloud Watson Machine Learning service instance to complete the deployment. You'll need to run the following steps to deploy:
 
 * Sign in and create the service [here](https://cloud.ibm.com/catalog/services/machine-learning).
-* Click on `Service credentials` and then `New credential` and `Add`.
-* Use `View credentials` and copy the credentials JSON.
-* You will use the JSON to set the `wml_credentials` variable in the notebook.
-* The notebook will pip install watson-machine-learning-client. After the install, you usually need to restart your kernel and run the notebook again from the top.
+* Create an API key or IAM token using the instructions [here](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/ml-authentication.html). Keep this key/token handy for the next step.
+* Scroll down to the section titled *With Db2 Event Store Developer Edition plus Machine Learning on IBM Cloud, save the model with metadata.*
+Set your apikey and url in the `wml_credentials` section like so
 
-Load the notebook, using the file **`Event_Store_ML_Model_Deployment.ipynb`**.
+```
+wml_credentials = {
+  "url": "https://us-south.ml.cloud.ibm.com",
+  "apikey": "<apikey>"
+}
+```
+
+![wml_creds](doc/source/images/wml_creds.png)
+
+
+<!-- * Click on `Service credentials` and then `New credential` and `Add`.
+* Use `View credentials` and copy the credentials JSON. -->
+<!-- * You will use the JSON to set the `wml_credentials` variable in the notebook. -->
+* The notebook will pip install watson-machine-learning-client. After the install, you usually need to restart your kernel and run the notebook again from the top.
 
 Once the model is built and deployed, you can easily send it a new measurement and get a predicted temperature (one at a time or in batches).
 
@@ -250,7 +265,7 @@ Once the model is built and deployed, you can easily send it a new measurement a
 new_data = {"deviceID" : 2, "sensorID": 24, "ts": 1541430459386, "ambient_temp": 30, "power": 10}
 ```
 
-#### The result includes a predicted temperature
+#### The result returns a predicted temperature
 
 ```python
 predictions:  [48.98055760884435]
